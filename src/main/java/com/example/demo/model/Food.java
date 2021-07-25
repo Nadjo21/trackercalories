@@ -14,7 +14,7 @@ public class Food {
     private int id;
     private String name;
     private int quantity;
-    private int values;
+    private String type;
     private int calories;
 
 
@@ -35,8 +35,8 @@ public class Food {
         return quantity;
     }
 
-    public int getValues() {
-        return values;
+    public String getType() {
+        return type;
     }
 
     public int getCalories() {
