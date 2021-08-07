@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import javax.persistence.*;
 import java.text.DateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -14,7 +15,9 @@ public class WeightMeasurement {
 
     private int id;
     private int weight;
-   // private DateFormat date;
+   private LocalDateTime measurementDate;
+
+
 
     public int getId() {
         return id;
@@ -24,5 +27,9 @@ public class WeightMeasurement {
         return weight;
     }
 
-   //public int getdate() { return date; }
+    public LocalDateTime getMeasurementDate() {
+        return measurementDate;
+    }
+
+
 }
