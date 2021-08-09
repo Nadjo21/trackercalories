@@ -6,6 +6,7 @@ import com.example.demo.repository.FoodRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins="*")
@@ -22,6 +23,21 @@ public class FoodController {
     // Sélection de la liste de tous les aliments
     @GetMapping
     public List<Food> getAllFood() {return foodRepository.findAll();}
+
+//recuperation d'un aliment par son id ( pour  lier les formulaire coté angular lors de la saisie du journal alimentaire )
+
+        @GetMapping("/{id}")
+    public Food getFoodById(@PathVariable int id) {
+        //je range ci dessous ma methode dans un optionnal pour lui dire quoi faire si le resultat est nul
+        Optional<Food> food =foodRepository.findById(id);
+        if(food.isPresent()){
+            return food.get();
+        }else{
+            //retourner un code d'erreur ......
+        }
+        return null;
+    }
+
 
     // Ajout nouveaux aliments
     @PostMapping
