@@ -1,8 +1,11 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class FoodIntake {
@@ -12,7 +15,7 @@ public class FoodIntake {
    @SequenceGenerator(name = "foodintake_id_seq", allocationSize = 1)
 
     private int id;
-    private int date;
+    private LocalDate date;
     private int quantity;
 
 
@@ -25,7 +28,9 @@ private Food food;
         return id;
     }
 
-    public int getDate() {
+    // annotation pour contourner message d'erreur sur deserialisation impossible de la date
+   // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    public LocalDate getDate() {
         return date;
     }
 
