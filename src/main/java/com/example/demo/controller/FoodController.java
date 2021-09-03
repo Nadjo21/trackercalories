@@ -38,7 +38,6 @@ public class FoodController {
         return null;
     }
 
-
     // Ajout nouveaux aliments
     @PostMapping
     public void createFood(@RequestBody Food foodToCreate) {
