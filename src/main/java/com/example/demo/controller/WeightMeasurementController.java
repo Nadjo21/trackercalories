@@ -1,4 +1,5 @@
 package com.example.demo.controller;
+
 import com.example.demo.model.WeightMeasurement;
 import com.example.demo.repository.WeightMeasurementRepository;
 import org.springframework.web.bind.annotation.*;
@@ -18,16 +19,16 @@ public class WeightMeasurementController {
     }
 
     @GetMapping
-    public List<WeightMeasurement> getAllWeightMeasurement() {return weightMeasurementRepository.findAll();}
-
-
-    @PostMapping
-    public void createWeightMeasurement(@RequestBody WeightMeasurement weightMeasurementToCreate){
-        weightMeasurementRepository.save(weightMeasurementToCreate);
-
+    public List<WeightMeasurement> getAllWeightMeasurement() {
+        return weightMeasurementRepository.findAll();
     }
 
 
+    @PostMapping
+    public void createWeightMeasurement(@RequestBody WeightMeasurement weightMeasurementToCreate) {
+        weightMeasurementRepository.save(weightMeasurementToCreate);
+
+    }
 
 
 }

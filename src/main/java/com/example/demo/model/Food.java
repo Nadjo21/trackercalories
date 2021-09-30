@@ -1,13 +1,9 @@
 package com.example.demo.model;
-
 import javax.persistence.*;
 import java.util.List;
 
-
 @Entity
-
 public class Food {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "food_id_seq")
     @SequenceGenerator(name = "food_id_seq", allocationSize = 1)
@@ -16,8 +12,6 @@ public class Food {
     private int quantity;
     private String type;
     private int calories;
-
-
 
     //1 aliment peut se retrouver sur plusieurs foodintake
     @OneToMany(mappedBy = "food")

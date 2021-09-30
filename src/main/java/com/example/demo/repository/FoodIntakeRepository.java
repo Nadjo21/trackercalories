@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Repository
-public interface FoodIntakeRepository extends JpaRepository<FoodIntake,Integer> {
+public interface FoodIntakeRepository extends JpaRepository<FoodIntake, Integer> {
     List<FoodIntake> findByDate(LocalDate startDate);
 
 }

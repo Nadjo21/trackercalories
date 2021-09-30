@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 
 @RequestMapping("api/food")
 public class FoodController {
@@ -18,21 +18,23 @@ public class FoodController {
     private FoodRepository foodRepository;
 
     public FoodController(FoodRepository foodRepository) {
-        this.foodRepository = foodRepository;}
+        this.foodRepository = foodRepository;
+    }
 
     // Sélection de la liste de tous les aliments
     @GetMapping
-    public List<Food> getAllFood() {return foodRepository.findAll();}
+    public List<Food> getAllFood() {
+        return foodRepository.findAll();
+    }
 
-//recuperation d'un aliment par son id ( pour  lier les formulaire coté angular lors de la saisie du journal alimentaire )
-
-        @GetMapping("/{id}")
+    //recuperation d'un aliment par son id ( pour  lier les formulaire coté angular lors de la saisie du journal alimentaire )
+    @GetMapping("/{id}")
     public Food getFoodById(@PathVariable int id) {
         //je range ci dessous ma methode dans un optionnal pour lui dire quoi faire si le resultat est nul
-        Optional<Food> food =foodRepository.findById(id);
-        if(food.isPresent()){
+        Optional<Food> food = foodRepository.findById(id);
+        if (food.isPresent()) {
             return food.get();
-        }else{
+        } else {
             //retourner un code d'erreur ......
         }
         return null;
@@ -52,7 +54,7 @@ public class FoodController {
 
 
     // Suppression d'un aliment(via son id)
-    @DeleteMapping ("{id}")
+    @DeleteMapping("{id}")
     public void deleteFood(@PathVariable Integer id) {
         foodRepository.deleteById(id);
     }
