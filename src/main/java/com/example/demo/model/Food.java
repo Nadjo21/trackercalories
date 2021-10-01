@@ -20,19 +20,15 @@ public class Food {
     public int getId() {
         return id;
     }
-
     public String getName() {
         return name;
     }
-
     public int getQuantity() {
         return quantity;
     }
-
     public String getType() {
         return type;
     }
-
     public int getCalories() {
         return calories;
     }
