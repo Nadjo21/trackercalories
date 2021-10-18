@@ -1,4 +1,6 @@
-package com.example.demo.Security;
+package com.example.demo.security;
+
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -19,7 +21,7 @@ import java.util.Date;
 import java.util.stream.Collectors;
 
 @Component
-    public class TokenProvider {
+public class TokenProvider {
     @Value("${security.jwt.token.secret-key:secret-key}")
     private String secretKey;
 
@@ -34,6 +36,7 @@ import java.util.stream.Collectors;
     }
 
     public String createToken(Authentication authentication) {
+
         Claims claims = Jwts.claims().setSubject(authentication.getName());
         claims.put(AUTHORITIES_KEY, authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining(",")));
 
@@ -47,7 +50,6 @@ import java.util.stream.Collectors;
                 .signWith(SignatureAlgorithm.HS512, secretKey)//
                 .compact();
     }
-
 
     public Authentication getAuthentication(String token) {
         Claims claims = Jwts.parser()
@@ -77,9 +79,4 @@ import java.util.stream.Collectors;
             throw new JwtException(e.getMessage());
         }
     }
-
-
-
-    }
-
-
+}
