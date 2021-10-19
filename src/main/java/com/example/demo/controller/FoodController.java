@@ -1,22 +1,16 @@
 package com.example.demo.controller;
-
-
 import com.example.demo.model.Food;
 import com.example.demo.repository.FoodRepository;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
-
 @RequestMapping("api/food")
 public class FoodController {
 
-
     private FoodRepository foodRepository;
-
     public FoodController(FoodRepository foodRepository) {
         this.foodRepository = foodRepository;
     }
@@ -51,7 +45,6 @@ public class FoodController {
     public void updateFood(@RequestBody Food foodToUpdate) {
         foodRepository.save(foodToUpdate);
     }
-
 
     // Suppression d'un aliment(via son id)
     @DeleteMapping("{id}")

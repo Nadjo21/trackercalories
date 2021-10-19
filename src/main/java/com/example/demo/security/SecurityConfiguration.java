@@ -1,8 +1,9 @@
-package com.example.demo.JWT;
-
+package com.example.demo.security;
 import com.example.demo.model.Role;
-import io.swagger.models.HttpMethod;
+import com.example.demo.security.jwt.JWTConfigurer;
+import com.example.demo.security.jwt.TokenProvider;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
     private final TokenProvider tokenProvider;
 
     public SecurityConfiguration(TokenProvider tokenProvider) {
@@ -32,7 +34,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public RoleHierarchy roleHierarchy() {
         RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
-        String hierarchy = "ROLE_ADMIN > ROLE_CREATOR \n ROLE_CREATOR > ROLE_READER";
+       // String hierarchy = "ROLE_ADMIN > ROLE_CREATOR \n ROLE_CREATOR > ROLE_READER";
+        String hierarchy = "ROLE_ADMIN > ROLE_READER";
         roleHierarchy.setHierarchy(hierarchy);
         return roleHierarchy;
     }
@@ -54,7 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 .antMatchers(HttpMethod.OPTIONS, "/**")
                 .antMatchers("/*.{js,html}")
-                .antMatchers("/h2-console/**")
+             //   .antMatchers("/h2-console/**")
                 .antMatchers("/swagger-ui/index.html");
     }
 
@@ -76,11 +79,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/authentication").permitAll()
+                .antMatchers("/authentication/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/**").authenticated()
-                .antMatchers(HttpMethod.POST, "/api/**").hasAuthority(Role.ROLE_CREATOR.getAuthority())
-                .antMatchers(HttpMethod.PUT, "/api/**").hasAuthority(Role.ROLE_CREATOR.getAuthority())
-                .antMatchers(HttpMethod.DELETE, "/api/**").hasAuthority(Role.ROLE_CREATOR.getAuthority())
+                .antMatchers(HttpMethod.POST, "/api/**").hasAuthority(Role.ROLE_ADMIN.getAuthority())
+                .antMatchers(HttpMethod.PUT, "/api/**").hasAuthority(Role.ROLE_ADMIN.getAuthority())
+                .antMatchers(HttpMethod.DELETE, "/api/**").hasAuthority(Role.ROLE_ADMIN.getAuthority())
                 .antMatchers("/admin/**").hasAuthority(Role.ROLE_ADMIN.getAuthority())
                 .and()
                 .apply(securityConfigurerAdapter());
@@ -89,6 +92,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private JWTConfigurer securityConfigurerAdapter() {
         return new JWTConfigurer(tokenProvider);
     }
-
 }
-

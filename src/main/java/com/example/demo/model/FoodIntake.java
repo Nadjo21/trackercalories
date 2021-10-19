@@ -1,5 +1,4 @@
 package com.example.demo.model;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -18,25 +17,19 @@ public class FoodIntake {
 
     // +sieurs Food Intake  peuvent être rattaché a un meme user
     @ManyToOne
-    private Appuser appuser;
+    private AppUser appuser;
 
     public int getId() {
         return id;
     }
-
-
-
     public LocalDate getDate() {
         return date;
     }
-
     public int getQuantity() {
         return quantity;
     }
-
     public Food getFood() {
         return food;
     }
-
-    public Appuser getAppuser() { return appuser;}
+    public AppUser getAppuser() { return appuser;}
 }

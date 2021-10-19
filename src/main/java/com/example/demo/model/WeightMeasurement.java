@@ -1,13 +1,10 @@
 package com.example.demo.model;
-
 import javax.persistence.*;
 import java.time.LocalDate;
-
 
 @Entity
 public class WeightMeasurement {
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "weightmeasurement_id_seq")
     @SequenceGenerator(name = "weightmeasurement_id_seq", allocationSize = 1)
 
@@ -17,23 +14,17 @@ public class WeightMeasurement {
 
     // +sieurs Weight  peuvent être rattaché a un meme user
     @ManyToOne
-    private Appuser appuser;
-
-    public Appuser getAppuser() {
+    private AppUser appuser;
+    public AppUser getAppuser() {
         return appuser;
     }
-
     public int getId() {
         return id;
     }
-
     public int getWeight() {
         return weight;
     }
-
     public LocalDate getMeasurementDate() {
         return measurementDate;
     }
-
-
 }
