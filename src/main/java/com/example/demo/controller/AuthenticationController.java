@@ -37,9 +37,6 @@ public class AuthenticationController {
     }
 
 
-
-
-
     /**
      * Point d'entrée API permettant de créer un compte utilisateur standard
      *
