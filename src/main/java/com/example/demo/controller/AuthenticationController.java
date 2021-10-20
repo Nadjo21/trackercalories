@@ -43,23 +43,23 @@ public class AuthenticationController {
      * @param newUser l'utilisateur à créer
      * @return l'utilisateur nouvellement créé si le username n'est pas déjà existant
      */
-    @PostMapping("api/signup")
-    public ResponseEntity signUp(@RequestBody AppUser newUser) {
-        Optional<AppUser> existingUser = appUserRepository.findByUsernameIgnoreCase(newUser.getUsername());
-
-        // Pour faire simple on renvoie juste un code d'erreur 400, mais il faudrait renvoyer plus d'information pour que l'utilisateur comprenne le pb.
-        if (existingUser.isPresent()) {
-            return ResponseEntity.badRequest().build();
-        } else {
-            // On encode le mot de passe pour éviter de l'avoir en clair dans la BDD
-            String encryptedPassword = passwordEncoder.encode(newUser.getPassword());
-            // On crée un nouvel utilisateur avec le role reader par défaut et le mot de passe hashé
-            newUser = new AppUser(newUser.getUsername(), encryptedPassword, Collections.singletonList(Role.ROLE_READER));
-            // On sauve l'utilisateur
-            appUserRepository.save(newUser);
-            return ResponseEntity.ok().build();
-        }
-    }
+//    @PostMapping("api/signup")
+//    public ResponseEntity signUp(@RequestBody AppUser newUser) {
+//        Optional<AppUser> existingUser = appUserRepository.findByUsernameIgnoreCase(newUser.getUsername());
+//
+//        // Pour faire simple on renvoie juste un code d'erreur 400, mais il faudrait renvoyer plus d'information pour que l'utilisateur comprenne le pb.
+//        if (existingUser.isPresent()) {
+//            return ResponseEntity.badRequest().build();
+//        } else {
+//            // On encode le mot de passe pour éviter de l'avoir en clair dans la BDD
+//            String encryptedPassword = passwordEncoder.encode(newUser.getPassword());
+//            // On crée un nouvel utilisateur avec le role reader par défaut et le mot de passe hashé
+//            newUser = new AppUser(newUser.getUsername(), encryptedPassword, Collections.singletonList(Role.ROLE_READER));
+//            // On sauve l'utilisateur
+//            appUserRepository.save(newUser);
+//            return ResponseEntity.ok().build();
+//        }
+//    }
 
     /**
      * Point d'entrée API permettant de récupérer un Token pour avoir accès aux autres méthodes.

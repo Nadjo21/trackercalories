@@ -11,7 +11,7 @@ public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appuser_id_seq")
     @SequenceGenerator(name = "appuser_id_seq", allocationSize = 1)
-    private long id;
+    private int id;
     private String username;
 
     @JsonIgnore
@@ -23,10 +23,12 @@ public class AppUser {
     private List<Role> roleList;
 
     //1 user peut avoir  plusieurs weight
+    @JsonIgnore
     @OneToMany(mappedBy = "appuser")
     private List<WeightMeasurement> weightmeasurement;
 
     //1 user peut avoir  plusieurs foodintake
+    @JsonIgnore
     @OneToMany(mappedBy = "appuser")
     private List<FoodIntake> foodintake;
 

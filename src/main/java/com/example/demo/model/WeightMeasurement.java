@@ -13,6 +13,7 @@ public class WeightMeasurement {
     private LocalDate measurementDate;
 
     // +sieurs Weight  peuvent être rattaché a un meme user
+
     @ManyToOne
     private AppUser appuser;
     public AppUser getAppuser() {
